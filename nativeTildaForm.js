@@ -3,7 +3,7 @@ $(window).on("load", function () {
     var tildaFormSuccessHandler = window.t_forms__onSuccess;
     var formCallbackList = {
       // formID : call function
-      form583517633: localFormCallback,
+      'form123456789': localFormCallback,
     };
 
     window.t_forms__onSuccess = formSuccessHandler;

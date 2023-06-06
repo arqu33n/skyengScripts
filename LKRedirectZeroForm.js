@@ -2,8 +2,8 @@
   var tildaFormSuccessHandler = window.t396_onSuccess;
   var formCallbackList = {
     // formID : call function
-    form111111111: localFormCallback,
-    form222222222: localFormCallback,
+    'form111111111': localFormCallback,
+    'form222222222': localFormCallback,
   };
 
   window.t396_onSuccess = formSuccessHandler;
