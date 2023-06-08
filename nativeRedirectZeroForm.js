@@ -2,13 +2,15 @@
   var tildaFormSuccessHandler = window.t396_onSuccess;
   var formCallbackList = {
     // formID : call function
-    'form111111111': localFormCallback,
-    'form222222222': localFormCallback,
+    form586317900: localFormCallback,
+    form586317901: localFormCallback,
+    form586317922: localFormCallback,
+    form586404225: localFormCallback,
   };
 
   window.t396_onSuccess = formSuccessHandler;
 
-  async function formSuccessHandler(form) {
+  function formSuccessHandler(form) {
     if (!form) return;
 
     const originalArg = form;
@@ -20,7 +22,7 @@
     var callback = formCallbackList[form.id];
 
     if (callback) {
-      await callback.call(form, form);
+      callback.call(form, form);
     }
 
     if (tildaFormSuccessHandler) {
@@ -32,50 +34,99 @@
     var xhr = new XMLHttpRequest();
     // data from form
     var email = $(`#${form.id} input[name="email"]`).val();
-    var name = $(`#${form.id} input[name="name"]`).val();
-    var phone = $(`#${form.id} input[name="phone"]`)
+    var parentName = $(`#${form.id} input[name="parentName"]`).val();
+    var parentPhone = $(`#${form.id} input[name="parentPhone"]`)
       .val()
       .replace(/[^\+/s0-9]/g, "");
-    // referer link
-    var referer = window.location.href.split("?")[0];
+    var name = $(`#${form.id} input[name="name"]`).val();
+    var childPhone = $(`#${form.id} input[name="childPhone"]`).val();
+    var subscribe_to = $(`#${form.id} input[name="subscribe_to"]`).val();
+    var workspace = $(`#${form.id} input[name="workspace"]`).val();
+    var subscription_attributes_televoxImportGroup = $(
+      `#${form.id} input[name="subscription_attributes_televoxImportGroup"]`
+    ).val();
+    var subscription_attributes_televoxIntegration = $(
+      `#${form.id} input[name="subscription_attributes_televoxIntegration"]`
+    ).val();
+    var subscription_attributes_location = $(
+      `#${form.id} input[name="subscription_attributes_location"]`
+    ).val();
+    var customer_attributes_offset = $(
+      `#${form.id} input[name="customer_attributes_offset"]`
+    ).val();
+    var customer_attributes_parentPhone = $(
+      `#${form.id} input[name="customer_attributes_parentPhone"]`
+    ).val();
+    var customer_attributes_parentName = $(
+      `#${form.id} input[name="customer_attributes_parentName"]`
+    ).val();
+    var subscription_attributes_utmMarks = $(
+      `#${form.id} input[name="subscription_attributes_utmMarks"]`
+    ).val();
+    var referer = window.location.href;
 
     // Google Apps Script deploy ID
     var googleSpreadsheetUrl =
-      "https://script.google.com/macros/s/AKfycbxOM1wBnil1UhYKr7o--r2rTMYGMDArRl3GUp_CYyqsoA5KbmfiD07Qob6LPz2Ji123/exec";
+      "https://script.google.com/macros/s/AKfycbwrKTqXfiQCcwD8c4avAwsO00fWqLtnY7FJ4zJJtlBq2d2gHm-itaje5VdfWGaKpJ1C/exec";
     // URL params data
     var params = new URLSearchParams(location.search);
 
     // add form data to URL params string
     params.set("email", email);
+    params.set("parentName", parentName);
+    params.set("parentPhone", parentPhone);
     params.set("name", name);
-    params.set("phone", phone);
+    params.set("childPhone", childPhone);
+    params.set("subscribe_to", subscribe_to);
+    params.set("workspace", workspace);
+    params.set(
+      "subscription_attributes_televoxImportGroup",
+      subscription_attributes_televoxImportGroup
+    );
+    params.set(
+      "subscription_attributes_televoxIntegration",
+      subscription_attributes_televoxIntegration
+    );
+    params.set(
+      "subscription_attributes_location",
+      subscription_attributes_location
+    );
+    params.set("customer_attributes_offset", customer_attributes_offset);
+    params.set(
+      "customer_attributes_parentPhone",
+      customer_attributes_parentPhone
+    );
+    params.set(
+      "customer_attributes_parentName",
+      customer_attributes_parentName
+    );
+    params.set(
+      "subscription_attributes_utmMarks",
+      subscription_attributes_utmMarks
+    );
     params.set("referer", referer);
 
-    return new Promise((resolve) => {
-      try {
-        xhr.open("GET", googleSpreadsheetUrl + "?" + params.toString(), true);
-        xhr.setRequestHeader(
-          "Content-type",
-          "application/x-www-form-urlencoded"
-        );
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState !== 4) {
-            return;
-          }
+    var successUrl = form.getAttribute("data-success-url");
+    if (successUrl) {
+      form.removeAttribute("data-success-url");
+    }
 
-          var successUrl = form.getAttribute("data-success-url");
+    try {
+      xhr.open("GET", googleSpreadsheetUrl + "?" + params.toString(), true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) {
+          return;
+        }
 
-          if (successUrl) {
-            window.location.href = successUrl;
-          }
+        if (successUrl) {
+          window.location.href = successUrl;
+        }
+      };
 
-          resolve();
-        };
-
-        xhr.send(null);
-      } catch (e) {
-        console.error(e);
-      }
-    });
+      xhr.send(null);
+    } catch (e) {
+      console.error(e);
+    }
   }
 })();
