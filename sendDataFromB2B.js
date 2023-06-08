@@ -65,10 +65,6 @@
       xhr.send(null);
     } catch (e) {
       console.error(e);
-    } finally {
-      var successUrl = form.getAttribute("data-success-url");
-
-      if (successUrl) window.location.href = successUrl;
     }
   }
 
