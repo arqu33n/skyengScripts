@@ -2,8 +2,8 @@
   var tildaFormSuccessHandler = window.t396_onSuccess;
   var formCallbackList = {
     // ID форм   -   функция для вызова
-    form591280887: callFormListeners,
-    form592956654: callFormListeners,
+    'form591280887': callFormListeners,
+    'form592956654': callFormListeners,
   };
 
   window.t396_onSuccess = formSuccessHandler;
