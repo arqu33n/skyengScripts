@@ -40,29 +40,6 @@
       .replace(/[^\+/s0-9]/g, "");
     var name = $(`#${form.id} input[name="name"]`).val();
     var childPhone = $(`#${form.id} input[name="childPhone"]`).val();
-    var subscribe_to = $(`#${form.id} input[name="subscribe_to"]`).val();
-    var workspace = $(`#${form.id} input[name="workspace"]`).val();
-    var subscription_attributes_televoxImportGroup = $(
-      `#${form.id} input[name="subscription_attributes_televoxImportGroup"]`
-    ).val();
-    var subscription_attributes_televoxIntegration = $(
-      `#${form.id} input[name="subscription_attributes_televoxIntegration"]`
-    ).val();
-    var subscription_attributes_location = $(
-      `#${form.id} input[name="subscription_attributes_location"]`
-    ).val();
-    var customer_attributes_offset = $(
-      `#${form.id} input[name="customer_attributes_offset"]`
-    ).val();
-    var customer_attributes_parentPhone = $(
-      `#${form.id} input[name="customer_attributes_parentPhone"]`
-    ).val();
-    var customer_attributes_parentName = $(
-      `#${form.id} input[name="customer_attributes_parentName"]`
-    ).val();
-    var subscription_attributes_utmMarks = $(
-      `#${form.id} input[name="subscription_attributes_utmMarks"]`
-    ).val();
     var referer = window.location.href;
 
     // Google Apps Script deploy ID
@@ -77,33 +54,6 @@
     params.set("parentPhone", parentPhone);
     params.set("name", name);
     params.set("childPhone", childPhone);
-    params.set("subscribe_to", subscribe_to);
-    params.set("workspace", workspace);
-    params.set(
-      "subscription_attributes_televoxImportGroup",
-      subscription_attributes_televoxImportGroup
-    );
-    params.set(
-      "subscription_attributes_televoxIntegration",
-      subscription_attributes_televoxIntegration
-    );
-    params.set(
-      "subscription_attributes_location",
-      subscription_attributes_location
-    );
-    params.set("customer_attributes_offset", customer_attributes_offset);
-    params.set(
-      "customer_attributes_parentPhone",
-      customer_attributes_parentPhone
-    );
-    params.set(
-      "customer_attributes_parentName",
-      customer_attributes_parentName
-    );
-    params.set(
-      "subscription_attributes_utmMarks",
-      subscription_attributes_utmMarks
-    );
     params.set("referer", referer);
 
     var successUrl = form.getAttribute("data-success-url");
