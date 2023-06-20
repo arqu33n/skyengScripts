@@ -1,9 +1,9 @@
 (function () {
   var tildaFormSuccessHandler = window.t396_onSuccess;
   var formCallbackList = {
-    // ID форм   -   функция для вызова
-    'form591280887': callFormListeners,
-    'form592956654': callFormListeners,
+    // formID : call function
+    form591280887: callFormListeners,
+    form592956654: callFormListeners,
   };
 
   window.t396_onSuccess = formSuccessHandler;
@@ -29,12 +29,12 @@
   }
 
   function callFormListeners(form) {
-    localFormCallback(form);
-    submitForm(form);
+    saveDataToSpreadSheet(form);
+    createOrder(form);
   }
-  function localFormCallback(form) {
+  function saveDataToSpreadSheet(form) {
     var xhr = new XMLHttpRequest();
-
+    // data from form
     var email = $(`#${form.id} input[name="email"]`).val();
     var name = $(`#${form.id} input[name="name"]`).val();
     var phone = $(`#${form.id} input[name="phone"]`)
@@ -45,12 +45,13 @@
     var lead_type = $(`#${form.id} input[name="lead_type"]`).val();
     var promoCode = $(`#${form.id} input[name="promoCode"]`).val();
 
-    // ID деплоя(развертывания) скрипта
+    // Google Apps Script deploy ID
     var googleSpreadsheetUrl =
       "https://script.google.com/macros/s/AKfycbxQOwYuiNn5VwwM9JBnLASCZY8DQWFTsEa1f_-P7yEyJQsDC6ZUO1WzbxdIX6mLU772Cg/exec";
+    // URL params data
     var params = new URLSearchParams(location.search);
 
-    // в params.set видимые поля формы
+    // add form data to URL params string
     params.set("email", email);
     params.set("name", name);
     params.set("phone", phone);
@@ -68,8 +69,8 @@
     }
   }
 
-  function submitForm(form) {
-    email = $(`#${form.id} input[name="email"]`).val();
+  // request function
+  function createOrder(form) {
     name = $(`#${form.id} input[name="name"]`).val();
     phone = $(`#${form.id} input[name="phone"]`)
       .val()
@@ -92,7 +93,7 @@
         phone: phone,
         email: email,
         generateLoginLinkTo: "https://student.skyeng.ru/",
-        serviceTypeKey: "english_adult_not_native_speaker_premium",
+        serviceTypeKey: "english_adult_not_native_speaker",
         utm_page: utm_page,
         utm_source: utm_source,
         source_type: source_type,
