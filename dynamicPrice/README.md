@@ -2,6 +2,8 @@
 
 Рендер карточек с ценами, привязанными к контракту в системе CRM.
 
+![priceexample](https://gitlab.skyeng.link/skyeng/tilda-customization/-/raw/master/dynamicPrice/example/price.gif)
+
 # Features
 
 - Динамическая отрисовка цен из указанного контракта
