@@ -2,7 +2,7 @@
 
 Рендер карточек с ценами, привязанными к контракту в системе CRM.
 
-![priceexample](https://gitlab.skyeng.link/skyeng/tilda-customization/-/raw/master/dynamicPrice/example/price.gif)
+![priceexample](https://github.com/arqu33n/skyengScripts/blob/master/dynamicPrice/example/price.gif?raw=true)
 
 # Features
 
